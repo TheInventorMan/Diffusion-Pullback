@@ -317,6 +317,7 @@ class UNetModel(nn.Module):
         num_heads=1,
         num_heads_upsample=-1,
         use_scale_shift_norm=False,
+        text_embed_dim=768,  # Default CLIP text embedding dimension
     ):
         super().__init__()
 
@@ -345,6 +346,13 @@ class UNetModel(nn.Module):
 
         if self.num_classes is not None:
             self.label_emb = nn.Embedding(num_classes, time_embed_dim)
+            
+        # Text embedding projection
+        self.text_proj = nn.Sequential(
+            nn.Linear(text_embed_dim, time_embed_dim),
+            nn.SiLU(),
+            nn.Linear(time_embed_dim, time_embed_dim)
+        ) if text_embed_dim > 0 else None
 
         self.input_blocks = nn.ModuleList(
             [
@@ -462,7 +470,7 @@ class UNetModel(nn.Module):
         """
         return next(self.input_blocks.parameters()).dtype
 
-    def forward(self, x, t, y=None, return_sigma=False):
+    def forward(self, x, t, y=None, text_embeddings=None, return_sigma=False):
         """
         Apply the model to an input batch.
 
@@ -491,6 +499,10 @@ class UNetModel(nn.Module):
         if self.num_classes is not None:
             assert y.shape == (x.shape[0],)
             emb = emb + self.label_emb(y)
+            
+        if text_embeddings is not None and self.text_proj is not None:
+            text_emb = self.text_proj(text_embeddings)
+            emb = emb + text_emb
 
         h = x.type(self.inner_dtype)
         for module in self.input_blocks:

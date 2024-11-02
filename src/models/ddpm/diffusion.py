@@ -634,6 +634,7 @@ class PullBackDDPM(DDPM):
     def local_x0_decoder_pullback_xt(
             self, x=None, t=None, at=None, op=None, block_idx=None, pca_rank=50, chunk_size=10,
             num_chunk=None, min_iter=10, max_iter=100, convergence_threshold=1e-3,
+            text_condition=None, text_guidance_scale=7.5,
         ):
         '''
         Returns
