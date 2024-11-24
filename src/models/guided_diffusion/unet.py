@@ -85,7 +85,7 @@ class TimestepEmbedSequential(nn.Sequential, TimestepBlock):
                 x = layer(x)
         return x
 
-    def embed_text_condition(self, text_condition):
+    def embed_text_condition(self, text_condition, emb):
         """
         Embed the text condition for integration into the UNet.
         
@@ -96,7 +96,7 @@ class TimestepEmbedSequential(nn.Sequential, TimestepBlock):
         # This is a simple example using a dummy embedding
         # In practice, you would use a more sophisticated method
         # such as a pre-trained language model to generate embeddings
-        return torch.tensor([1.0] * emb.size(1), device=text_condition.device)
+        return torch.tensor([1.0] * emb.size(1), device=emb.device)
 
 
 class Upsample(nn.Module):
