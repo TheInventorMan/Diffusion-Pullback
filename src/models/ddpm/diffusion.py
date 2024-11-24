@@ -127,7 +127,7 @@ class DDPM(nn.Module):
 
     def forward(self, x, t, text_condition=None):
         """
-        Forward pass with optional text condition.
+        Forward pass with optional text condition for adding text to images.
         
         :param x: Input tensor.
         :param t: Timestep tensor.
