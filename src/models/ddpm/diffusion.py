@@ -125,8 +125,34 @@ class DDPM(nn.Module):
                                         stride=1,
                                         padding=1)
 
-    def forward(self, x, t):
+    def forward(self, x, t, text_condition=None):
+        """
+        Forward pass with optional text condition.
+        
+        :param x: Input tensor.
+        :param t: Timestep tensor.
+        :param text_condition: Optional text condition to guide the diffusion process.
+        """
+        if text_condition is not None:
+            # Process the text condition and integrate it into the model
+            text_embedding = self.process_text_condition(text_condition)
+            # Integrate text_embedding into the diffusion process
+            # This is a placeholder for the actual integration logic
+            x = x + text_embedding
+
+        # Continue with the standard forward process
         raise NotImplementedError
+
+    def process_text_condition(self, text_condition):
+        """
+        Process the text condition to create an embedding.
+        
+        :param text_condition: The text condition to process.
+        :return: A tensor representing the text embedding.
+        """
+        # Placeholder for text processing logic
+        # Convert text_condition to a tensor or embedding
+        return torch.zeros_like(text_condition)  # Example placeholder
     
 class PullBackDDPM(DDPM):
     '''

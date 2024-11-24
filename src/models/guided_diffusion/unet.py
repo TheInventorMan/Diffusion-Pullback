@@ -71,13 +71,28 @@ class TimestepEmbedSequential(nn.Sequential, TimestepBlock):
     support it as an extra input.
     """
 
-    def forward(self, x, emb):
+    def forward(self, x, emb, text_condition=None):
+        if text_condition is not None:
+            # Embed the text condition and integrate it into the model
+            text_embedding = self.embed_text_condition(text_condition)
+            emb = emb + text_embedding
+
         for layer in self:
             if isinstance(layer, TimestepBlock):
                 x = layer(x, emb)
             else:
                 x = layer(x)
         return x
+
+    def embed_text_condition(self, text_condition):
+        """
+        Embed the text condition for integration into the UNet.
+        
+        :param text_condition: The text condition to embed.
+        :return: A tensor representing the text embedding.
+        """
+        # Placeholder for text embedding logic
+        return torch.zeros_like(text_condition)  # Example placeholder
 
 
 class Upsample(nn.Module):

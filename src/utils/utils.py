@@ -13,8 +13,18 @@ import torch.nn as nn
 from einops import rearrange, einsum
 
 ########
-# path #
+# text #
 ########
+def process_text_input(text):
+    """
+    Process text input to convert it into a suitable format for the model.
+    
+    :param text: The text input to process.
+    :return: A tensor or embedding representing the processed text.
+    """
+    # Placeholder for text processing logic
+    # Convert text to a tensor or embedding
+    return torch.zeros(1)  # Example placeholder
 from configs.paths import (
     DATASET_PATHS,
     # PROMPT_PATHS,
