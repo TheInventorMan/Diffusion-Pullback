@@ -27,8 +27,11 @@ def text_to_embedding(text):
     :param text: The text input to convert.
     :return: A tensor representing the text embedding.
     """
-    # Placeholder implementation
-    return torch.tensor([1.0])  # Example tensor
+    # Convert text to a tensor or embedding
+    # This is a simple example using a dummy embedding
+    # In practice, you would use a more sophisticated method
+    # such as a pre-trained language model to generate embeddings
+    return torch.tensor([1.0] * 512)  # Example tensor with a fixed size
 
 def process_text_input(text):
     """

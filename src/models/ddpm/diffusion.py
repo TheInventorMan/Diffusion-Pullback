@@ -139,10 +139,10 @@ class DDPM(nn.Module):
             # Integrate text_embedding into the diffusion process
             x = self.integrate_text_embedding(x, text_embedding)
 
-        # Continue with the standard forward process
-        # Implement the rest of the forward pass logic here
-        # This is a placeholder for the actual forward pass logic
-        return x  # Example placeholder
+        # This is a simple example of integrating text embedding
+        # In practice, you would integrate this embedding into the model's layers
+        # For demonstration, we simply add it to the input tensor
+        return x + text_embedding.unsqueeze(0).unsqueeze(-1).unsqueeze(-1)
 
     def process_text_condition(self, text_condition):
         """
@@ -151,9 +151,11 @@ class DDPM(nn.Module):
         :param text_condition: The text condition to process.
         :return: A tensor representing the text embedding.
         """
-        # Placeholder for text processing logic
         # Convert text_condition to a tensor or embedding
-        return torch.zeros_like(text_condition)  # Example placeholder
+        # This is a simple example using a dummy embedding
+        # In practice, you would use a more sophisticated method
+        # such as a pre-trained language model to generate embeddings
+        return torch.tensor([1.0] * self.temb_ch, device=text_condition.device)
     
 class PullBackDDPM(DDPM):
     '''
