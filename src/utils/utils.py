@@ -20,6 +20,16 @@ PROMPT_PATHS = {
 ########
 # text #
 ########
+def text_to_embedding(text):
+    """
+    Convert text to a tensor or embedding.
+    
+    :param text: The text input to convert.
+    :return: A tensor representing the text embedding.
+    """
+    # Placeholder implementation
+    return torch.tensor([1.0])  # Example tensor
+
 def process_text_input(text):
     """
     Process text input to convert it into a suitable format for the model.
