@@ -27,9 +27,9 @@ def process_text_input(text):
     :param text: The text input to process.
     :return: A tensor or embedding representing the processed text.
     """
-    # Placeholder for text processing logic
+    # Implement text processing logic
     # Convert text to a tensor or embedding
-    return torch.zeros(1)  # Example placeholder
+    return text_to_embedding(text)  # Example implementation
 from src.models.ddpm.diffusion import PullBackDDPM
 from src.models.guided_diffusion.script_util import g_DDPM
 from configs.paths import (

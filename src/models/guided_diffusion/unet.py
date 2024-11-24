@@ -92,8 +92,9 @@ class TimestepEmbedSequential(nn.Sequential, TimestepBlock):
         :param text_condition: The text condition to embed.
         :return: A tensor representing the text embedding.
         """
-        # Placeholder for text embedding logic
-        return torch.zeros_like(text_condition)  # Example placeholder
+        # Implement text embedding logic
+        # Convert text_condition to a tensor or embedding
+        return self.text_embedding_layer(text_condition)  # Example implementation
 
 
 class Upsample(nn.Module):

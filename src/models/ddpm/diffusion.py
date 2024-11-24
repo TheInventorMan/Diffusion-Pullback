@@ -137,11 +137,12 @@ class DDPM(nn.Module):
             # Process the text condition and integrate it into the model
             text_embedding = self.process_text_condition(text_condition)
             # Integrate text_embedding into the diffusion process
-            # This is a placeholder for the actual integration logic
-            x = x + text_embedding
+            x = self.integrate_text_embedding(x, text_embedding)
 
         # Continue with the standard forward process
-        raise NotImplementedError
+        # Implement the rest of the forward pass logic here
+        # This is a placeholder for the actual forward pass logic
+        return x  # Example placeholder
 
     def process_text_condition(self, text_condition):
         """
