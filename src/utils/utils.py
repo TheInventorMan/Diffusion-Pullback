@@ -12,6 +12,11 @@ import torch.nn as nn
 
 from einops import rearrange, einsum
 
+PROMPT_PATHS = {
+    'Laion-COCO': '/path/to/laion-coco',  # Placeholder path
+    'MS-COCO': '/path/to/ms-coco'         # Placeholder path
+}
+
 ########
 # text #
 ########
@@ -25,6 +30,8 @@ def process_text_input(text):
     # Placeholder for text processing logic
     # Convert text to a tensor or embedding
     return torch.zeros(1)  # Example placeholder
+from src.models.ddpm.diffusion import PullBackDDPM
+from src.models.guided_diffusion.script_util import g_DDPM
 from configs.paths import (
     DATASET_PATHS,
     # PROMPT_PATHS,
@@ -395,6 +402,7 @@ def forward_dh(
     # down
     down_block_res_samples = (sample,)
     for down_block_idx, downsample_block in enumerate(self.down_blocks):
+        after_res_or_sa = False  # Default value, adjust as needed
         if (op == 'down') & (block_idx == down_block_idx) & after_res_or_sa:
             sample, res_samples, _ = down_block_forward(
                 downsample_block, hidden_states=sample, temb=emb, encoder_hidden_states=encoder_hidden_states, 
